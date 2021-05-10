@@ -1,0 +1,13 @@
+steps:
+
+- id: build-helm-image
+  name: gcr.io/cloud-builders/docker
+  entrypoint: bash
+  args:
+    - -c
+    - |
+      docker build --tag=gcr.io/$PROJECT_ID/cloud-builders-helm:latest --tag=gcr.io/$PROJECT_ID/cloud-builders-helm:${COMMIT_SHA} .
+
+images:
+- gcr.io/$PROJECT_ID/cloud-builders-helm:${COMMIT_SHA}
+- gcr.io/$PROJECT_ID/cloud-builders-helm:latest
